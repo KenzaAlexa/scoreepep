@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT-FESTIVAL 2026 — FREE FIRE CHAMPIONSHIP SCOREBOARD</title>
+  <meta name="description" content="Official Live Scoreboard Free Fire Championship - IT-Festival 2026. Realtime Standings.">
+  
+  <!-- Google Fonts: Chakra Petch, Space Mono, Pixelify Sans, Press Start 2P -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Pixelify+Sans:wght@600;700;900&family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="obs-solid-bg">
+
+  <!-- Solid background layers for OBS (No transparency issue) -->
+  <div class="obs-bg-canvas"></div>
+  <div class="bg-grid-pattern"></div>
+  <div class="ambient-glow ag-pink"></div>
+  <div class="ambient-glow ag-cyan"></div>
+  <div class="ambient-glow ag-yellow"></div>
+
+  <!-- MAIN BROADCAST VIEWPORT (100% Fit for 12 Teams) -->
+  <div class="broadcast-container">
+    
+    <div class="broadcast-main-grid">
+
+      <!-- ================= MAIN SCOREBOARD CARD ================= -->
+      <main class="esports-board-card">
+
+        <!-- Top Tournament Header (Matching FFWS Reference with Sponsor Logo Slider) -->
+        <header class="board-top-header">
+          <!-- Left Logo -->
+          <div class="bth-left-logo">
+            <div class="ff-emblem-box">
+              <span class="ff-emblem-text">FFCS</span>
+              <span class="ff-emblem-sub">IT-FEST 2026</span>
+            </div>
+            <div class="bth-stage-label">CHAMPION FALL</div>
+          </div>
+
+          <!-- Center Sponsor Carousel Box (Auto Rotates Sponsors with Smooth Fade Animation) -->
+          <div class="bth-sponsor-box" id="sponsor-slider-box" title="Official Tournament Sponsors">
+            <span class="bth-sponsor-tag" id="sponsor-category-text">OFFICIAL ENERGY DRINK PARTNER</span>
+            <div class="sponsor-image-track" id="sponsor-image-track">
+              <img id="sponsor-img-current" class="sponsor-img-slide fade-in" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Sponsor">
+            </div>
+          </div>
+
+          <!-- Right Status Indicator -->
+          <div class="bth-right-meta">
+            <div class="obs-live-indicator" id="live-indicator-pill">
+              <span class="obs-live-dot"></span>
+              <span class="obs-live-text">LIVE STANDINGS</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Champion Rush Points Target Banner -->
+        <div class="champion-rush-banner">
+          <div class="cr-badge-left">
+            <div class="cr-pts-number" id="cr-threshold-num">118</div>
+            <div class="cr-pts-label">
+              <span class="cr-label-small">POINTS</span>
+              <span class="cr-label-bold">ACTIVATE CHAMPION RUSH</span>
+            </div>
+          </div>
+          <div class="cr-info-rule" id="formula-rule-note">
+            ELIMS (1 PT) + PLACEMENT PTS
+          </div>
+        </div>
+
+        <!-- Table Columns Header -->
+        <div class="scoreboard-table-header">
+          <div class="th-col th-rank">RANK</div>
+          <div class="th-col th-team">TEAM NAME</div>
+          <div class="th-col th-booyah">BOOYAH</div>
+          <div class="th-col th-elims">ELIMS</div>
+          <div class="th-col th-placement">PLACEMENT PTS</div>
+          <div class="th-col th-total">TOTAL</div>
+        </div>
+
+        <!-- 12 TEAMS CONTAINER (Smooth FLIP Transition) -->
+        <div id="scoreboard-rows" class="scoreboard-rows-container">
+          <!-- 12 Teams rendered dynamically with seamless FLIP reordering -->
+        </div>
+
+        <!-- Sleek Redesigned Bottom Champion Rush Footer (No AI slop) -->
+        <footer class="board-bottom-footer">
+          <div class="cr-status-badge badge-orange-rush">
+            <svg class="cr-crown-svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+            </svg>
+            <span class="cr-status-text">WON BY CHAMPION RUSH</span>
+          </div>
+
+          <div class="cr-status-badge badge-blue-rush">
+            <svg class="cr-crown-svg crown-outline" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+            </svg>
+            <span class="cr-status-text">SATISFIED CHAMPION RUSH CONDITION</span>
+          </div>
+        </footer>
+
+      </main>
+
+      <!-- ================= SIDEBAR: VIXEL MASCOT & QUICK STATS ================= -->
+      <aside class="broadcast-sidebar">
+        <!-- VIXEL Mascot Card -->
+        <div class="mascot-broadcast-card">
+          <div class="mascot-speech-bubble" id="mascot-bubble-text">
+            ✦ BOOYAH! LIVE SCOREBOARD ✦
+          </div>
+
+          <div class="mascot-img-holder">
+            <img src="assets/ff.png" alt="VIXEL Mascot" class="mascot-img-element" title="Klik VIXEL untuk reaksi!">
+          </div>
+
+          <div class="mascot-footer-badge">
+            <span class="mascot-name-title">VIXEL</span>
+            <span class="mascot-event-title">IT-FESTIVAL 2026</span>
+          </div>
+        </div>
+
+        <!-- Mini Match Info Widget -->
+        <div class="mini-info-widget">
+          <div class="miw-row">
+            <span class="miw-label">TOTAL TIM:</span>
+            <span class="miw-value" id="stat-total-teams">12</span>
+          </div>
+          <div class="miw-row">
+            <span class="miw-label">TOTAL BOOYAH:</span>
+            <span class="miw-value highlight-yellow" id="stat-total-booyah">3</span>
+          </div>
+          <div class="miw-row">
+            <span class="miw-label">TOP KILLER:</span>
+            <span class="miw-value highlight-cyan" id="stat-top-elims">FL (36)</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+  </div>
+
+  <!-- Discreet Floating Controller for Stream Operator (Hover to reveal) -->
+  <div class="floating-stream-controls">
+    <button id="btn-toggle-sound" class="fsc-btn" title="Toggle Sound FX">🔊 SFX</button>
+    <button id="btn-fullscreen" class="fsc-btn" title="Toggle Fullscreen">⛶ Fullscreen</button>
+    <a href="admin.html" target="_blank" class="fsc-btn fsc-btn-admin" title="Buka Panel Admin">⚙️ Admin</a>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById('btn-fullscreen').addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    });
+
+    const sfxBtn = document.getElementById('btn-toggle-sound');
+    sfxBtn.addEventListener('click', () => {
+      if (window.scoreboardApp) {
+        window.scoreboardApp.soundEnabled = !window.scoreboardApp.soundEnabled;
+        sfxBtn.textContent = window.scoreboardApp.soundEnabled ? '🔊 SFX' : '🔇 Muted';
+      }
+    });
+  </script>
+
+  <!-- Realtime Cloud Engine & Scripts -->
+  <script src="assets/paho-mqtt.min.js"></script>
+  <script src="sync.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
